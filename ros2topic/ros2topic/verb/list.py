@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from ros2cli.node.direct import DirectNode
 from ros2cli.node.strategy import add_arguments
+from ros2cli.node.strategy import NodeStrategy
 from ros2topic.api import get_topic_names_and_types
 from ros2topic.verb import VerbExtension
 
@@ -51,7 +51,7 @@ class ListVerb(VerbExtension):
 
     def main(self, *, args):
         topic_info = []
-        with DirectNode(args) as node:
+        with NodeStrategy(args) as node:
             topic_names_and_types = get_topic_names_and_types(
                 node=node,
                 include_hidden_topics=args.include_hidden_topics)
